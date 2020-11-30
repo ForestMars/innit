@@ -17,7 +17,8 @@ function show_usage (){
   printf "Usage: $0 [options [parameters]]\n"
   printf "\n"
   printf "Options:\n"
-  printf " -name|--name [name], Project name, which will be its directory name.  \n"
+  printf " -n|--name [name], Project name, which will be its directory name.  \n"
+  printf " -p|--path [name], Project directory path, defaults to home (~)  \n"
   printf " -g|--git, Initialise as new git projct. (default is no.) \n"
   printf " -v|--verbose, Announce every little thing. \n"
   printf " -h|--help, Print help\n"
@@ -40,21 +41,36 @@ function get_project_name (){
   return 0
 }
 
+function get_dir_path (){
+
+  if [[ ${1:0:1} == "-" ]] ; then
+    echo "Sorry, project directory cannot begin with a dash" ; exit 1;
+  else
+    DIR_PATH=$1
+    echo "Project directory has been set to:  $1"
+    shift
+  fi
+  return 0
+}
+
 while [ ! -z "$1" ]; do
   case "$1" in
      --name|-n)
       shift
-      TRAIN=true
       get_project_name "$@"
       ;;
-     --git|-g)
-      GIT=y
-      echo "Initializing Git repo after scaffolding project."
-      shift
-      ;;
-     *)
-      show_usage
-      ;;
+    --path|-p)
+     shift
+     get_dir_path "$@"
+     ;;
+   --git|-g)
+    GIT=y
+    echo "Initializing Git repo after scaffolding project."
+    shift
+    ;;
+   *)
+    show_usage
+    ;;
   esac
 shift
 done

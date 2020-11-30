@@ -24,7 +24,7 @@ CLI utility to create project scaffolding following a project templates. Current
 
 * (Destination directory defaults to `~`.)
 
-# FEATURES
+# Features
 
 * Handles scaffolding of a new Cython project, including build source and target directories, with scripts to build for local or target architecture.
 

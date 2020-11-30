@@ -22,7 +22,7 @@ CLI utility to create project scaffolding following a project templates. Current
 
 `~>./new.sh --name MyProject --path some/path`
 
-* (Destination directory defaults to `~`.)
+* (Destination directory defaults to user home directory: `~`)
 
 # Features
 
@@ -32,7 +32,7 @@ CLI utility to create project scaffolding following a project templates. Current
 
 # Why Not Cookiecutter?
 
-* Ultimately this script could easily be ported to a [Cookiecutter]() template. For this prototypical version however, that's significant overkill. Nothing against overkill, mind you, but rather than having to maintain consistency (updating, etc.) with an overly complicated approach (for such purposes), a more straightforward shell script and template files gets the job done.
+* Ultimately this script could easily be ported to a [Cookiecutter](https://github.com/cookiecutter/cookiecutter) template. For this prototypical version however, that's significant overkill. Nothing against overkill, mind you, but rather than having to maintain consistency (updating, etc.) with an overly complicated approach (for such purposes), a more straightforward shell script and template files gets the job done.
 
 # Known Issues
 

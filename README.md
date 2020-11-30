@@ -8,7 +8,7 @@ CLI utility to create project scaffolding following a project templates. Current
   * [Version](#version)
   * [Use](#use)
   * [Features](#features)
-  * [Why not Cookiecutter?](#install)
+  * [Why not Cookiecutter?](#why-not-cookiecutter)
   * [Known Issues](#known-issues)   
   * [License](#license)  
 

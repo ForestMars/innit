@@ -1,4 +1,4 @@
-# build.sh - Build script for compiling Zorobot source code.
+# build_arch.sh - Build script for compiling {PROJECT} source code.
 
 # Compile NLU for intent extraction.
 # cc -c -o nlu.o nlu.c

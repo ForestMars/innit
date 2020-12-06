@@ -1,6 +1,6 @@
 #!/bin/bash
-##
-# @Description: Init: Create new project scaffolding.
+# @Description: Innit: Create new project scaffolding.
+
 
 ASSETS='assets'
 BUILD='build'
@@ -91,9 +91,17 @@ mkdir -p $PROJ_PATH/$LIB
 mkdir -p $PROJ_PATH/$LIB/c
 mkdir -p $PROJ_PATH/$LIB/ext
 
+cp -r files/gitignore $PROJ_PATH/.gitignore
 cp -r files/build $PROJ_PATH
+cp -r files/common $PROJ_PATH
+cp -r files/LICENSE.md $PROJ_PATH
 
 # @TODO: Check Git is locally installed, etc.
 if [[ ! -z "$GIT" ]]; then
   git init
+  #touch config/.keep
+  #touch docker/.keep
+  #touch helm/.keep
+  touch lib/c/.keep
+  touch lib/ext/.keep
 fi

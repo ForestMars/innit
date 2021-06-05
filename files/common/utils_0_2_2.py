@@ -1,5 +1,5 @@
 # utils.py - Commonly used helper functions to handle mundane operations safely.
-__version__ = '0.2.4'
+__version__ = '0.2.2'
 
 import csv
 import hashlib
@@ -26,7 +26,7 @@ class HaltException(Exception): pass
 class ContextManager_(_GeneratorContextManager, ContextDecorator): pass
 
 class ddict(dict):
-    """ dot.notation for dicts using non-standard class name. """
+    """ dot.notation for dicts """
     __getattr__ = dict.get
     __setattr__ = dict.__setitem__
     __delattr__ = dict.__delitem__
@@ -60,35 +60,6 @@ def fopen(filepath, mode):
     file = open(filepath, mode)
     yield file
     file.close()
-
-def csv_to_dict(file):
-    """ write key val csv to dict. """
-    #mydict = {y[0]: y[1] for y in [x.split(",") for x in open(file).read().split('\n') if x]}
-    with open(file) as f:
-        d = dict(filter(None, csv.reader(f)))
-
-    return d
-
-# @FIXME: THis should really check for duplcate keys before committing.
-def rev_dict(dict):
-    """ In node.js, this would be a module. """ # 🤣
-    inv_dict = {v: k for k, v in dict.items()}
-
-    return inv_dict
-
-
-def dict_to_csv(d, file):
-    with open(file, 'w') as f:
-        for key in d.keys():
-            f.write("%s,%s\n"%(key, d[key]))
-
-
-def dict_to_csv_(d, file):
-    """ Saves dictionary to a csv with 1 row for keys and 1 row for values. """
-    with open(file, 'w') as f:
-        w = csv.DictWriter(f, d.keys())
-        w.writeheader()
-        w.writerow(d)
 
 
 ## file system utilities
@@ -227,15 +198,3 @@ def id_file_type(file):
     # n.b. filepath not file
     with open(filepath, 'r') as fp:
         hex_list = ["{:02x}".format(ord(c)) for c in fp.read()]
-
-def const_equal(a: str, b: str) -> bool:
-    """ Constant time string compare (mainly for v large docs.) """
-
-    if len(a) != len(b):
-        return False
-
-    result = True
-    for i in range(len(a)):
-        result &= (a[i] == b[i])
-
-    return result

@@ -82,14 +82,14 @@ fi
 PROJ_PATH=${DIR_PATH}${PROJ}
 
 mkdir -p ${PROJ_PATH}
-mkdir -p $PROJ_PATH/$ASSETS
-mkdir -p $PROJ_PATH/$CONFIG
-mkdir -p $PROJ_PATH/$DOCKER
-mkdir -p $PROJ_PATH/$HELM
-mkdir -p $PROJ_PATH/$TESTS
-mkdir -p $PROJ_PATH/$LIB
-mkdir -p $PROJ_PATH/$LIB/c
-mkdir -p $PROJ_PATH/$LIB/ext
+mkdir -p $PROJ_PATH/{
+  $ASSETS,
+  $CONFIG,
+  $DOCKER,
+  $HELM,
+  $TESTS,
+  $LIB,
+mkdir -p $LIB/{c, ext}
 
 cp -r files/gitignore $PROJ_PATH/.gitignore
 cp -r files/build $PROJ_PATH

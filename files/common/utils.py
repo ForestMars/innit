@@ -32,6 +32,9 @@ class ddict(dict):
     __delattr__ = dict.__delitem__
 
 
+def is_unique(l):
+  return len(set(l)) == len(l)
+
 # Decorator for writing to filesystem. Can we put this in a class pls?
 def exists(func):
     @wraps(func)

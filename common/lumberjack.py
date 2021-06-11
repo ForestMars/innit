@@ -1,23 +1,22 @@
-# lib/logger.py - Logging class and functions for DAE.
-__version__ = '0.1'
+# lib/logger.py - Logging class and functions.
+__version__ = '0.2'
 __all__ = ['Log', 'LOG_LEVEL', 'LOG_DIR', 'LOGFILE_NAME']
 #import inspect
 import os
 import logging
 import traceback
 
-
-from common.utils import ddict, mkdir
+from common.utils import ddict
 
 
 # Sensible defaults
 LOG_LEVEL = 'DEBUG'
 LOG_DIR = 'logs/' or mkdir('logs')
-mkdir('logs')
 LOGFILE_NAME = 'debug.log'
-os.system("touch logs/debug.log")
 FORMAT = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
+
+os.system("touch logs/debug.log")
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -62,6 +61,21 @@ def log(logmsg, lvl='INFO', e=None):
     logging.lvl(' ' + logmsg + err)
 
 
+# @TODO: move into common/colors.py ?
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    RESET = '\033[0m'
+
+# print(f"{bcolors.OKGREEN}Lumberjack Logging Enabled{bcolors.RESET}")
+
+
 """
 # Flask config loader.
 except Exception as e:
@@ -78,12 +92,4 @@ except Exception as e:
     except:
         handle_unhandled_error()
         log("no idea.")
-
-logging.basicConfig(level=logging.DEBUG, format='%(message)s | \'%(name)s:%(lineno)s\'')
-log = logging.getLogger(os.path.basename(__file__))
-
-logging.basicConfig(format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
-    datefmt='%Y-%m-%d:%H:%M:%S',
-    level=logging.DEBUG)
-logger = logging.getLogger(__name__)
 """

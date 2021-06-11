@@ -171,7 +171,7 @@ class Grok():
             elif int(t1) in range (1,7):
                 ampm = 'pm'
 
-        # no return ? 
+        # no return ?
 
 def euro_time_to_us(euro_time):
     pass

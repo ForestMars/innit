@@ -139,11 +139,9 @@ cython_debug/
 # MacOS ridiculousness
 .DS_Store
 
-# tar -X 
+# tar -X
 .git
 
 # kill bill
 config/bill.pid
 config/budd.pid
-
-

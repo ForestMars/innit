@@ -1,6 +1,6 @@
 # utils.py - Commonly used helper functions to handle mundane operations safely.
 __version__ = '0.2.4'
-
+from __future__ import annotations
 import csv
 import hashlib
 import json

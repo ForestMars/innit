@@ -1,10 +1,11 @@
 # utils.py - Commonly used helper functions to handle mundane operations safely.
-__version__ = '0.2.4'
-from __future__ import annotations
+__version__ = '0.2.5'
+# 0.2.5 CHANGELOG - removed id_mime_type & magic dependency
+
 import csv
 import hashlib
 import json
-import magic
+#import magic
 import os
 import subprocess # Currently used only with Hadoop.
 import sys
@@ -72,6 +73,7 @@ def csv_to_dict(file):
 
     return d
 
+
 # @FIXME: THis should really check for duplcate keys before committing.
 def rev_dict(dict):
     """ In node.js, this would be a module. """ # 🤣
@@ -79,12 +81,10 @@ def rev_dict(dict):
 
     return inv_dict
 
-
 def dict_to_csv(d, file):
     with open(file, 'w') as f:
         for key in d.keys():
             f.write("%s,%s\n"%(key, d[key]))
-
 
 def dict_to_csv_(d, file):
     """ Saves dictionary to a csv with 1 row for keys and 1 row for values. """
@@ -96,10 +96,20 @@ def dict_to_csv_(d, file):
 
 ## file system utilities
 
+# ext is placeholder for future functionality.
 def get_reg_files(dir: str, ext: str='txt') -> list:
     """ Decorator for all filesystem fetching operations. Returns list of entries for given directory, excuding hidden files. """
     files = [f for f in os.listdir(dir) if os.path.isfile(os.path.abspath(os.path.join(dir, f))) and not f.startswith('.')]
     return files
+
+def get_reg_files_sub(dir: str, ext: str='txt') -> list:
+    file_list = []
+    ignore = ['.DS_Store']
+    for path, currentDirectory, files in os.walk(dir):
+        for file in files:
+            if file not in ignore:
+                file_list.append(os.path.join(path, file))
+    return file_list
 
 def get_dir_list(dir: str) -> list:
     return [d for d in os.listdir(dir) if os.path.isdir(os.path.join(dir,d))]
@@ -110,6 +120,7 @@ def isdir(path, dir=None):
 def path_exists(path):
     return os.path.exists(path)
 
+# drop in replacement for pathlib.Path().mkdir()
 def mkdir(path, dir=None):
     if dir is not None and not isdir(path, dir):
         try:
@@ -183,6 +194,7 @@ def move_hdfs_file(file, old, new):
             log("Failed to update hdfs target.")
 
 def move_topic(node, new_topic):
+    """ Placeholder for Kakfa handler """
     pass
 
 def update_parent(node, old, new):
@@ -213,11 +225,6 @@ def redirect_sysout_to_file(obj, filename: str):
         print(obj)
     sys.stdout = orig_stdout
 
-def id_mime_type(file):
-    mime = magic.Magic(mime=True)
-    mimetype = mime.from_file(file)
-    return mimetype
-
 def id_file_type(file):
     filetypes = ddict(
         jpg = ['FF', 'D8'], # N.B.
@@ -242,3 +249,10 @@ def const_equal(a: str, b: str) -> bool:
         result &= (a[i] == b[i])
 
     return result
+
+""" Removed id_mime_type and magic dependency
+def id_mime_type(file):
+    mime = magic.Magic(mime=True)
+    mimetype = mime.from_file(file)
+    return mimetype
+"""
